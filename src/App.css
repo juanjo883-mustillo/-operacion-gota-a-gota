@@ -25,3 +25,85 @@
   border: none;
   text-align: left;
 }
+
+/* ─── Dashboard Layout ──────────────────────────────────────── */
+.dash-header {
+  background: #080f1e;
+  border-bottom: 1px solid #1a2540;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  gap: 10px;
+}
+
+.dash-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.dash-header-subtitle {
+  color: #94a3b8;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.dash-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.dash-body {
+  padding: 18px 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dash-row1 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.dash-row2 {
+  display: grid;
+  grid-template-columns: 1fr 270px;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.dash-row3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ─── Tablet (≤ 1024px) ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .dash-header       { padding: 10px 16px; }
+  .dash-body         { padding: 14px 16px; }
+  .dash-row1         { grid-template-columns: repeat(2, 1fr); }
+  .dash-row1 > *:last-child { grid-column: span 2; }
+  .dash-row2         { grid-template-columns: 1fr; }
+  .dash-row3         { grid-template-columns: 1fr 1fr; }
+}
+
+/* ─── Mobile (≤ 640px) ──────────────────────────────────────── */
+@media (max-width: 640px) {
+  .dash-header          { padding: 8px 12px; }
+  .dash-header-subtitle { display: none; }
+  .dash-header-logo     { display: none; }
+  .dash-body            { padding: 10px 10px; }
+  .dash-row1            { grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
+  .dash-row1 > *:last-child { grid-column: span 2; }
+  .dash-row2            { grid-template-columns: 1fr; gap: 8px; margin-bottom: 10px; }
+  .dash-row3            { grid-template-columns: 1fr; gap: 8px; }
+}

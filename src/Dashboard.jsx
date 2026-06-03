@@ -55,7 +55,7 @@ function PumpStatus({ status, stateLabel, uptime }) {
       background: STATUS_BG[status], border: `2px solid ${color}50`,
       borderRadius: 12, padding: '20px',
       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-      gap: 10, textAlign: 'center', gridColumn: 'span 1',
+      gap: 10, textAlign: 'center',
     }}>
       <div style={{
         width: 66, height: 66, borderRadius: '50%',
@@ -304,26 +304,22 @@ export default function Dashboard() {
     <div style={{ background: C.bg, minHeight: '100vh', fontFamily: "'Inter', system-ui, sans-serif" }}>
 
       {/* ── Header ── */}
-      <div style={{
-        background: '#080f1e', borderBottom: `1px solid ${C.border}`,
-        padding: '12px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        position: 'sticky', top: 0, zIndex: 10,
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{
+      <div className="dash-header">
+        <div className="dash-header-left">
+          <div className="dash-header-logo" style={{
             width: 40, height: 40, borderRadius: 10,
             background: `linear-gradient(135deg, ${C.blue}30, ${C.blue}10)`,
             border: `1px solid ${C.blue}40`,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: 20,
+            fontSize: 20, flexShrink: 0,
           }}>💧</div>
-          <div>
-            <div style={{ color: C.text, fontWeight: 700, fontSize: 15 }}>Bomba Predictiva · Marcos Paz</div>
-            <div style={{ color: C.sub, fontSize: 10, letterSpacing: 1 }}>SISTEMA DE MONITOREO CON INTELIGENCIA ARTIFICIAL</div>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ color: C.text, fontWeight: 700, fontSize: 15, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>Bomba Predictiva · Marcos Paz</div>
+            <div className="dash-header-subtitle">SISTEMA DE MONITOREO CON INTELIGENCIA ARTIFICIAL</div>
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div className="dash-header-right">
           {/* Live indicator */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 6, color: C.sub, fontSize: 10 }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: C.green, display: 'inline-block', animation: 'blink 1.5s infinite' }} />
@@ -341,10 +337,10 @@ export default function Dashboard() {
       </div>
 
       {/* ── Body ── */}
-      <div style={{ padding: '18px 24px', maxWidth: 1400, margin: '0 auto' }}>
+      <div className="dash-body">
 
         {/* Row 1: stat cards + pump status */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr', gap: 12, marginBottom: 14 }}>
+        <div className="dash-row1">
           <StatCard label="Vibración"   value={latest.vib?.toFixed(2) ?? '—'} unit="g"  color={C.blue}   icon="📳" />
           <StatCard label="Temperatura" value={latest.temp?.toFixed(1) ?? '—'} unit="°C" color={C.amber}  icon="🌡️" />
           <StatCard label="Corriente"   value={latest.curr?.toFixed(1) ?? '—'} unit="A"  color={C.green}  icon="⚡" />
@@ -353,7 +349,7 @@ export default function Dashboard() {
         </div>
 
         {/* Row 2: charts (left) + AI panel (right) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 270px', gap: 12, marginBottom: 14 }}>
+        <div className="dash-row2">
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             <LiveChart
               data={history} dataKey="vib" color={C.blue}
@@ -375,7 +371,7 @@ export default function Dashboard() {
         </div>
 
         {/* Row 3: alert log + demo controls */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        <div className="dash-row3">
           <AlertLog alerts={alerts} />
           <DemoControls
             currentState={currentState}
